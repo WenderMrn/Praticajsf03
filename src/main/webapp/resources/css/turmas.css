@@ -1,0 +1,11 @@
+body {
+  padding-top: 50px;
+}
+.main-page {
+  padding: 40px 15px;
+}
+
+h1.titulo {
+	font-family: Calibri;
+	color: #428bca;
+}

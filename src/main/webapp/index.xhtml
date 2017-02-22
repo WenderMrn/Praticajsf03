@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+	
+	<h:head>
+		<h:outputStylesheet library="css" name="style.css"/>
+		<h:outputStylesheet library="font-awesome" name="css/font-awesome.css"/>
+	</h:head>
+	<h:form>
+		<h:commandButton actionListener="#{turmasBean.listar}" value="Listar"></h:commandButton>
+		<h:dataTable value="#{turmasBean.turmas}" var="turma" 
+		style="background-color:gray" rowClasses="greenRow,whiteRow"
+		 cellpadding="5" cellspacing="1" headerClass="header" 
+		 rendered="#{turmasBean.turmas ne null}">
+		 	<h:column>
+		 		<h:selectBooleanCheckbox value="#{turmasBean.editavel[turma.id]}"></h:selectBooleanCheckbox>
+		 	</h:column>
+			<h:column>
+				<f:facet name="header">ID</f:facet>
+				#{turma.id}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Nome</f:facet>
+				<h:outputText value="#{turma.nome}" rendered="#{turmasBean.editavel[turma.id] ne true}"></h:outputText>
+				<h:inputText value="#{turma.nome}" rendered="#{turmasBean.editavel[turma.id] eq true}"></h:inputText> 
+				<h:commandLink actionListener="#{turmasBean.salvar(turma)}" rendered="#{turmasBean.editavel[turma.id] eq true}" styleClass="fa fa-save"></h:commandLink>
+			</h:column>
+			<h:column>
+				<f:facet name="header">Data</f:facet>
+				<h:outputText value="#{turma.dataCriacao}">
+					<f:convertDateTime dateStyle="medium"/>
+				</h:outputText>	
+			</h:column>
+			<h:column>
+				<h:commandLink action="#{turmasBean.excluir(turma)}" styleClass="fa fa-remove"></h:commandLink>
+			</h:column>
+			<h:column>
+				<h:commandButton value="Editar" action="..." />
+			</h:column>
+		</h:dataTable>
+	</h:form>
+</html>
