@@ -11,6 +11,7 @@
 		<h:outputStylesheet library="font-awesome" name="css/font-awesome.css"/>
 	</h:head>
 	<h:form>
+		#{turmasBean.init()}
 		<h:commandButton action="cadastrar_turma?faces-redirect=true" value="Cadastrar Turma"></h:commandButton>
 		<h:dataTable value="#{turmasBean.turmas}" var="turma" 
 		style="background-color:gray" rowClasses="greenRow,whiteRow"

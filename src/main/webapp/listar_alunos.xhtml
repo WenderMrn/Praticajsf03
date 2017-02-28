@@ -13,6 +13,7 @@
 	</h:head>
 	<h:body>
 	<h:form>
+		#{alunoBean.init()}
 		<h:panelGrid>
 			<h1>Turma: #{alunoBean.turma.nome}</h1>
 			<h:commandButton action="#{alunoBean.TelaCadastroAluno}" value="Matricular"></h:commandButton>

@@ -24,8 +24,7 @@ public class AlunoBean {
 	@PostConstruct
 	public void init(){
 		this.aluno = new Aluno();
-		this.turma = (Turma)FacesContext.getCurrentInstance().
-				getExternalContext().getRequestMap().get("turma");
+		this.listar();
 	}
 	
 	public Turma getTurma() {
@@ -47,6 +46,9 @@ public class AlunoBean {
 	}
 
 	public void listar(){
+		this.turma = (Turma)FacesContext.getCurrentInstance().
+				getExternalContext().getRequestMap().get("turma");
+		
 		TurmaDAO turmadao = new TurmaDAO();
 		this. turma = turmadao.find(this.turma.getId());
 	}
