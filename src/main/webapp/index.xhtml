@@ -11,13 +11,13 @@
 		<h:outputStylesheet library="font-awesome" name="css/font-awesome.css"/>
 	</h:head>
 	<h:form>
-		<h:commandButton actionListener="#{turmasBean.listar}" value="Listar"></h:commandButton>
+		<h:commandButton action="cadastrar_turma?faces-redirect=true" value="Cadastrar Turma"></h:commandButton>
 		<h:dataTable value="#{turmasBean.turmas}" var="turma" 
 		style="background-color:gray" rowClasses="greenRow,whiteRow"
 		 cellpadding="5" cellspacing="1" headerClass="header" 
 		 rendered="#{turmasBean.turmas ne null}">
 		 	<h:column>
-		 		<h:selectBooleanCheckbox value="#{turmasBean.editavel[turma.id]}"></h:selectBooleanCheckbox>
+		 		<h:selectBooleanCheckbox onclick="submit();" value="#{turmasBean.editavel[turma.id]}"></h:selectBooleanCheckbox>
 		 	</h:column>
 			<h:column>
 				<f:facet name="header">ID</f:facet>
@@ -25,7 +25,7 @@
 			</h:column>
 			<h:column>
 				<f:facet name="header">Nome</f:facet>
-				<h:outputText value="#{turma.nome}" rendered="#{turmasBean.editavel[turma.id] ne true}"></h:outputText>
+				<h:commandLink  action="#{turmasBean.listarAlunosTurma(turma)}" value="#{turma.nome}" rendered="#{turmasBean.editavel[turma.id] ne true}"></h:commandLink>
 				<h:inputText value="#{turma.nome}" rendered="#{turmasBean.editavel[turma.id] eq true}"></h:inputText> 
 				<h:commandLink actionListener="#{turmasBean.salvar(turma)}" rendered="#{turmasBean.editavel[turma.id] eq true}" styleClass="fa fa-save"></h:commandLink>
 			</h:column>
@@ -37,9 +37,6 @@
 			</h:column>
 			<h:column>
 				<h:commandLink action="#{turmasBean.excluir(turma)}" styleClass="fa fa-remove"></h:commandLink>
-			</h:column>
-			<h:column>
-				<h:commandButton value="Editar" action="..." />
 			</h:column>
 		</h:dataTable>
 	</h:form>

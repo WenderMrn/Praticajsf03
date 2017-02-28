@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions">
+	
+	<h:head>
+		<h:outputStylesheet library="css" name="style.css"/>
+		<h:outputStylesheet library="font-awesome" name="css/font-awesome.css"/>
+	</h:head>
+	<h:body>
+	<h:form>
+		<h:panelGrid>
+			<h1>Turma: #{alunoBean.turma.nome}</h1>
+			<h:commandButton action="#{alunoBean.TelaCadastroAluno}" value="Matricular"></h:commandButton>
+			<h:dataTable value="#{alunoBean.turma.alunos}" var="aluno" 
+			style="background-color:gray" rowClasses="greenRow,whiteRow"
+			 cellpadding="5" cellspacing="1" headerClass="header" 
+			 rendered="#{fn:length(alunoBean.turma.alunos) gt 0}">
+				<h:column>
+					<f:facet name="header">Nome</f:facet>
+					<h:outputText value="#{aluno.nome}"> </h:outputText> 
+				</h:column>
+				<h:column>
+					<f:facet name="header">Matrícula</f:facet>
+					<h:outputText value="#{aluno.matricula}"> </h:outputText> 
+				</h:column>
+				<h:column>
+					<f:facet name="header">Email</f:facet>
+					<h:outputText value="#{aluno.email}"> </h:outputText> 
+				</h:column>
+			</h:dataTable>
+			<h:outputText value="Não há alunos na turma" rendered="#{fn:length(alunoBean.turma.alunos) le 0}"></h:outputText>
+			<h:commandLink action="index?faces-redirect=true" value="Voltar"></h:commandLink>
+		</h:panelGrid>
+	</h:form>
+	</h:body>
+</html>

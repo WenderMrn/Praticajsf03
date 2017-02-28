@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+	<h:outputStylesheet library="css" name="style.css"/>
+	<h:outputStylesheet library="font-awesome" name="css/font-awesome.css"/>
+</h:head>
+<h:body>
+	<h:messages style="color:red;margin:8px;" />	
+	<h:form>
+		<h:panelGrid>
+			<h1>Cadastrar Turma</h1>
+			<h:outputLabel for="nome">
+				<h:outputText value="Nome da Turma: "/>
+			</h:outputLabel>		
+			<h:inputText id="nome" value="#{turmasBean.turma.nome}" required="true"></h:inputText> 
+			<h:outputLabel for="data">
+				<h:outputText value="Data: "/>
+			</h:outputLabel>
+			<h:inputText id="data" type="date" value="#{turmasBean.turma.dataCriacao}" required="true">
+				 <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
+			</h:inputText>
+			<h:commandButton action="#{turmasBean.cadastrar}" value="Cadastrar Turma"></h:commandButton>
+			<h:commandLink action="index?faces-redirect=true" value="Voltar"></h:commandLink>
+		</h:panelGrid>
+	</h:form>
+</h:body>
+</html>
