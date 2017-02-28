@@ -80,6 +80,7 @@ public class TurmasBean extends BaseBean{
 		tDao.beginTransaction();
 		tDao.insert(this.turma);
 		tDao.commit();
+		this.init();
 		try {
 			FacesContext.getCurrentInstance().
 			getExternalContext().redirect("index.jsf");
