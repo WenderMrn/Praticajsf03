@@ -55,7 +55,7 @@ public class TurmasBean extends BaseBean{
 	public void listarAlunosTurma(Turma turma){
 		
 		FacesContext.getCurrentInstance()
-		.getExternalContext().getRequestMap().put("turma",turma);
+		.getExternalContext().getSessionMap().put("turma",turma);
 		
 		try {
 			FacesContext.getCurrentInstance()

@@ -24,6 +24,7 @@ public class AlunoBean {
 	@PostConstruct
 	public void init(){
 		this.aluno = new Aluno();
+		this.turma = new Turma();
 		this.listar();
 	}
 	
@@ -46,11 +47,15 @@ public class AlunoBean {
 	}
 
 	public void listar(){
-		this.turma = (Turma)FacesContext.getCurrentInstance().
-				getExternalContext().getRequestMap().get("turma");
+		Turma t = (Turma)FacesContext.getCurrentInstance().
+				getExternalContext().getSessionMap().get("turma");
 		
-		TurmaDAO turmadao = new TurmaDAO();
-		this. turma = turmadao.find(this.turma.getId());
+		if(t != null){
+			// buscar a turma no banco para manter a turma atualizada
+			TurmaDAO turmadao = new TurmaDAO();
+			this.turma = turmadao.find(t.getId());
+		}
+		
 	}
 	
 	public void TelaCadastroAluno(){
@@ -69,7 +74,7 @@ public class AlunoBean {
 		this.aluno.setTurma(this.turma);
 		alunodao.insert(this.aluno);
 		alunodao.commit();
-		this.listar();
+		this.aluno = new Aluno();
 		try {
 			FacesContext.getCurrentInstance().
 			getExternalContext().redirect("listar_alunos.jsf");
